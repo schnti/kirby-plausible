@@ -22,7 +22,7 @@ This plugin is free. If you use it in a commercial project, please consider:
 Via Composer:
 
 ```bash
-composer require schnti/kirby-plausible
+composer require schnti/plausible
 ```
 
 Or download the plugin from the GitHub releases and place it in:
