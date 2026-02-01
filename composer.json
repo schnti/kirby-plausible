@@ -1,5 +1,5 @@
 {
-  "name": "schnti/kirby-plausible",
+  "name": "schnti/plausible",
   "version": "1.0.0",
   "type": "kirby-plugin",
   "description": "Simple plugin providing Plausible iframe panel view to Kirby panel and frontend snippet.",
