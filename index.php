@@ -1,6 +1,6 @@
 <?php
 
-Kirby::plugin('floriankarsten/plausible', [
+Kirby::plugin('schnti/plausible', [
 	'areas' => [
 		'plausible' => function ($kirby) {
 			return [
@@ -12,12 +12,12 @@ Kirby::plugin('floriankarsten/plausible', [
 				'views' => [
 					[
 						'pattern' => 'plausible',
-						'action'  => function () use ($kirby) {
+						'action'  => function () {
 							return [
 								'component' => 'k-plausible-view',
 								'title' => 'Analytics',
 								'props' => [
-									'sharedLink' => option('floriankarsten.plausible.sharedLink')
+									'sharedLink' => (option('schnti.plausible', [])['sharedLink'] ?? null)
 								],
 							];
 						}

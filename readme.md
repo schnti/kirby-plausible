@@ -1,30 +1,96 @@
-# Kirby Plausible
-Simple plugin providing Plausible iframe panel view to Kirby panel and frontend snippet.
+# Kirby Plausible plugin
 
-![CleanShot 2021-11-04 at 17 53 43](https://user-images.githubusercontent.com/4954323/140384031-efdf83d7-06a3-4ce3-a60b-3827fe63fd9c.png)
+Simple Kirby plugin that
+
+* embeds **Plausible Analytics** in the Kirby Panel via an iframe (shared link)
+* adds a **frontend snippet** tracking page views
+
+![plausible screenshot](screenshot.png)
+
+---
+
+## Commercial Usage
+
+This plugin is free. If you use it in a commercial project, please consider:
+
+* [making a donation](https://www.paypal.me/schnti/5)
+
+---
+
 ## Installation
-`composer require  floriankarsten/kirby-plausible`
-or download from releases
 
-## How to use
-1. Create a shared link https://plausible.io/docs/shared-links
-1. Set `floriankarsten.plausible.sharedLink` in config.php
-    ```php
-    // config/config.php
-    'floriankarsten.plausible' => [
-        // Required
-        'sharedLink' => 'https://plausible.io/share/yourwebsiteurl.com?auth=Jz0mCWTPu5opXi0sAgRrq',
-        // Optional: The value that will be set in data-domain attribute of <script> tag.
-        'domain' => 'test.com', // Defaults to $site->url()
-        // Optional: To use a self-hosted Plausible instance
-        // 'scriptHost' => 'https://plausible.example.com',
-        // Optional: To use Plausible script extensions
-        // 'scriptName' => 'plausible.outbound-links.exclusions'
-    ];
-    ```
-1. Add the following snippet inside your site's `<head>` tag. Note that this will not generate any output for logged in users or when Kirby is in debug mode.
-    ```php
-    <?php snippet('plausible'); ?>
-    ```
+Via Composer:
 
-This plugin wouldn't happen without [@garethworld](https://github.com/garethworld) who kindly hired me to make it and then wanted to have it released to Kirby community. Yaaaaay
+```bash
+composer require schnti/kirby-plausible
+```
+
+Or download the plugin from the GitHub releases and place it in:
+
+```
+/site/plugins/plausible
+```
+
+---
+
+## Configuration
+
+Add the following to your `config/config.php`:
+
+```php
+'schnti.plausible' => [
+  // Required: Shared link for the Panel iframe view
+  'sharedLink' => 'https://stats.example.com/share/example.com?auth=XXXXXXXX',
+
+  // Required: Plausible tracking script (signed pa-*.js)
+  // This can be plausible.io or a self‑hosted instance
+  'script' => 'https://stats.example.com/js/pa-XXXXXXXX.js',
+],
+```
+
+### Notes
+
+* The `script` value should point to the **project‑specific (signed) Plausible script** (`pa-*.js`).
+* The plugin assumes Plausible v2+ behavior.
+
+## Frontend usage
+
+Add the snippet inside your site’s `<head>` section:
+
+```php
+<?php snippet('plausible'); ?>
+```
+
+### Behavior
+
+The snippet outputs **nothing** when:
+  * Kirby is in `debug` mode
+  * a user is logged into the Panel
+
+
+## Panel Analytics View
+
+The plugin adds a new **Analytics** entry to the Kirby Panel sidebar.
+
+* Displays Plausible stats via the configured `sharedLink`
+* Uses an iframe embed
+* Implemented using `render()` (no runtime template compilation)
+* Does **not** require `unsafe-eval`
+
+> The Panel view is for visualization only and does **not** track page views.
+
+## Content Security Policy (CSP)
+
+A minimal CSP setup for a self‑hosted Plausible instance might look like this:
+
+```txt
+script-src 'self' `unsafe-inline` https://stats.example.com;
+connect-src https://stats.example.com;
+frame-src https://stats.example.com;
+```
+
+No `unsafe-eval` is required.
+
+## Thanks
+
+This plugin is based on the original work by [Florian Karsten](https://github.com/floriankarsten/kirby-plausible), many thanks for creating and sharing the foundation for this plugin 🙏

@@ -1,21 +1,31 @@
 {
-    "name": "floriankarsten/kirby-plausible",
-    "description": "",
-    "type": "kirby-plugin",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Florian Karsten",
-            "email": "code@floriankarsten.com"
-        }
-    ],
-    "require": {
-        "getkirby/composer-installer": "^1.1",
-	"getkirby/cms": "^4.0 || ^5.0"
-    },
-    "autoload": {
-    },
-    "config": {
-        "optimize-autoloader": true
+  "name": "schnti/kirby-plausible",
+  "version": "1.0.0",
+  "type": "kirby-plugin",
+  "description": "Simple plugin providing Plausible iframe panel view to Kirby panel and frontend snippet.",
+  "homepage": "https://github.com/schnti/kirby-plausible",
+  "authors": [
+    {
+      "name": "Timo Schneider",
+      "email": "info@kleiner-als.de",
+      "homepage": "https://kleiner-als.de/"
     }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "kirby",
+    "kirby-cms",
+    "kirby-plugin"
+  ],
+  "require": {
+    "getkirby/composer-installer": "^1.1",
+    "getkirby/cms": "^4.0 || ^5.0"
+  },
+  "autoload": {},
+  "config": {
+    "optimize-autoloader": true
+  },
+  "extra": {
+    "installer-name": "plausible"
+  }
 }
